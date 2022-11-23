@@ -35,7 +35,8 @@ rules:
     "http://xml.org/sax/features/external-parameter-entities" to false.
   mode: taint
   pattern-sources:
-    - patterns:
+    - mutate: true
+      patterns:
         - pattern-either:
             - pattern: |
                 $FACTORY = DocumentBuilderFactory.newInstance();
@@ -102,7 +103,8 @@ rules:
   pattern-sinks:
     - pattern: $FACTORY.newDocumentBuilder();
   pattern-sanitizers:
-    - patterns:
+    - mutate: true
+      patterns:
         - pattern-either:
             - pattern: |
                 $FACTORY.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
